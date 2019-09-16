@@ -105,7 +105,7 @@ abstract class AbstractHttpClient implements HttpClientInterface
      * @param array $options
      * @return Response
      */
-    private function generateHttpResponse(string $method, string $url, array $options = [])
+    private function generateHttpResponse(string $method, string $url, array $options = []): Response
     {
         $response = new Response();
 
