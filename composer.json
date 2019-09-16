@@ -1,0 +1,37 @@
+{
+    "name": "dant89/ixapi-client",
+    "description": "A PHP Client for the IX-API Project.",
+    "keywords": ["api","client", "ixapi", "ix-api"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://ix-api.net",
+    "authors": [
+        {
+            "name": "Dan Thorpe",
+            "email": "dant@linx.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dant89\\IXAPIClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-json": "^1.5",
+        "symfony/http-client": "^4.3"
+    },
+    "require-dev": {
+        "phpmd/phpmd": "^2.7",
+        "phpunit/phpunit": "^7.5",
+        "squizlabs/php_codesniffer": "^3.4"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
