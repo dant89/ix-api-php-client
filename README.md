@@ -1,5 +1,8 @@
 # IX-API PHP API Client
 
+[![Latest Stable Version][packagist-image]][packagist-url]
+[![Github Issues][github-issues-image]][github-issues-url]
+
 PHP API client for the [IX-API](https://ix-api.net).
 
 ## Installation
@@ -61,3 +64,9 @@ Contributions to the client are welcome, to contribute please:
 3. Commit your changes
 4. Push to the branch
 5. Create a new Pull Request
+
+[packagist-image]: https://img.shields.io/packagist/vpre/dant89/ix-api-client.svg
+[packagist-url]: https://packagist.org/packages/dant89/ix-api-client
+
+[github-issues-image]: https://img.shields.io/github/issues/dant89/ix-api-php-client
+[github-issues-url]: https://github.com/dant89/ix-api-php-client/issues
