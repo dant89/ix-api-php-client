@@ -15,15 +15,11 @@ class AuthClientTest extends ClientTestCase
         parent::setUp();
     }
 
-    /**
-     * @throws \Exception
-     * @group needs-config
-     */
     public function testPostAuth()
     {
         // Authenticate
-        $authClient = $this->client->getHttpClient('auth');
-        $response = $authClient->postAuthToken($this->key, $this->secret);
+        $client = $this->client->getHttpClient('auth');
+        $response = $client->postAuthToken($this->key, $this->secret);
 
         $this->assertEquals(200, $response->getStatus());
 

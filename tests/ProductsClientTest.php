@@ -5,10 +5,10 @@ namespace Tests;
 use Tests\Helper\ClientTestCase;
 
 /**
- * Class ProductClientTest
+ * Class ProductsClientTest
  * @package Tests
  */
-class ProductClientTest extends ClientTestCase
+class ProductsClientTest extends ClientTestCase
 {
     public function setUp(): void
     {
@@ -16,26 +16,18 @@ class ProductClientTest extends ClientTestCase
         $this->setBearerToken();
     }
 
-    /**
-     * @throws \Exception
-     * @group needs-config
-     */
     public function testGetProducts()
     {
-        $productClient = $this->client->getHttpClient('product');
-        $response = $productClient->getProducts();
+        $client = $this->client->getHttpClient('products');
+        $response = $client->getProducts();
 
         $this->assertEquals(200, $response->getStatus());
     }
 
-    /**
-     * @throws \Exception
-     * @group needs-config
-     */
     public function testGetProductsFilter()
     {
-        $productClient = $this->client->getHttpClient('product');
-        $response = $productClient->getProducts(null, [
+        $client = $this->client->getHttpClient('products');
+        $response = $client->getProducts(null, [
             'type' => 'exchange_lan'
         ]);
 
