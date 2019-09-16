@@ -1,5 +1,5 @@
 {
-    "name": "dant89/ixapi-client",
+    "name": "dant89/ix-api-client",
     "description": "A PHP Client for the IX-API Project.",
     "keywords": ["api","client", "ixapi", "ix-api"],
     "type": "library",

@@ -36,4 +36,12 @@ class ClientTestCase extends TestCase
         parent::setUp();
         $this->client = new Client($this->url);
     }
+
+    public function setBearerToken()
+    {
+        $authClient = $this->client->getHttpClient('auth');
+        $response = $authClient->postAuthToken($this->key, $this->secret);
+        $responseData = $response->getContent();
+        $this->client->setBearerToken($responseData['access_token']);
+    }
 }
