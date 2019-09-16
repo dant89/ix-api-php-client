@@ -1,11 +1,13 @@
 # IX-API PHP API Client
+
 PHP API client for the [IX-API](https://ix-api.net).
 
 ## Installation
-To install, run `composer require dant89/ixapi-client` in the root of your project or add `dant89/ixapi-client` to your composer.json.
-```
+
+To install, run `composer require dant89/ixapi-client` in the root of your project or add `dant89/ix-api-client` to your composer.json.
+```json
 "require": {
-    "dant89/ixapi-client": "^1.0"
+    "dant89/ix-api-client": "^1.0"
 }
 ```
 
@@ -13,7 +15,7 @@ To install, run `composer require dant89/ixapi-client` in the root of your proje
 
 The following is a simple example of how you could use this client to get a list of products from an implementor of the API.
 
-```
+```php
 <?php
 
 require('vendor/autoload.php');

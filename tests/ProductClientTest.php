@@ -13,21 +13,18 @@ class ProductClientTest extends ClientTestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->setBearerToken();
     }
 
     /**
      * @throws \Exception
      * @group needs-config
      */
-    public function testPostAuth()
+    public function testGetProducts()
     {
-        // Authenticate
-        $authClient = $this->client->getHttpClient('auth');
-        $response = $authClient->postAuthToken($this->key, $this->secret);
+        $productClient = $this->client->getHttpClient('product');
+        $response = $productClient->getProducts();
 
         $this->assertEquals(200, $response->getStatus());
-
-        $responseData = $response->getContent();
-        $this->assertArrayHasKey('access_token', $responseData);
     }
 }
