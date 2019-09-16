@@ -7,7 +7,7 @@ PHP API client for the [IX-API](https://ix-api.net).
 To install, run `composer require dant89/ixapi-client` in the root of your project or add `dant89/ix-api-client` to your composer.json.
 ```json
 "require": {
-    "dant89/ix-api-client": "^1.0"
+    "dant89/ix-api-client": "^0.0.1"
 }
 ```
 
@@ -29,16 +29,18 @@ $client = new Client(IXAPI_URL);
 $key = IXAPI_KEY;
 $secret = IXAPI_SECRET;
 
-// Authenticate
+// Get a bearer token from key / secret
 $authClient = $client->getHttpClient('auth');
 $authResponse = $authClient->postAuthToken($key, $secret);
 $authContent = $authResponse->getContent();
+
+// Authenticate
 $client->setBearerToken($authContent['access_token']);
 
 // Get a list of products
 $productClient = $client->getHttpClient('product');
-$productsResponse = $productClient->getProducts();
-$products = $productsResponse->getContent();
+$productResponse = $productClient->getProducts();
+$products = $productResponse->getContent();
 
 foreach ($products as $product) {
     echo $product['name'] . "\n";
