@@ -27,4 +27,18 @@ class ProductClientTest extends ClientTestCase
 
         $this->assertEquals(200, $response->getStatus());
     }
+
+    /**
+     * @throws \Exception
+     * @group needs-config
+     */
+    public function testGetProductsFilter()
+    {
+        $productClient = $this->client->getHttpClient('product');
+        $response = $productClient->getProducts(null, [
+            'type' => 'exchange_lan'
+        ]);
+
+        $this->assertEquals(200, $response->getStatus());
+    }
 }

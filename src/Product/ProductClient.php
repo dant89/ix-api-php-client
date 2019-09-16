@@ -3,6 +3,7 @@
 namespace Dant89\IXAPIClient\Product;
 
 use Dant89\IXAPIClient\AbstractHttpClient;
+use Dant89\IXAPIClient\Response;
 
 /**
  * Class ProductClient
@@ -10,13 +11,18 @@ use Dant89\IXAPIClient\AbstractHttpClient;
  */
 class ProductClient extends AbstractHttpClient
 {
-    public function getProducts(string $id = null)
+    /**
+     * @param string|null $id
+     * @param array $filters
+     * @return Response
+     */
+    public function getProducts(string $id = null, array $filters = []): Response
     {
         $url = '/products';
         if (!is_null($id)) {
             $url .= '/' . $id;
         }
 
-        return $this->get($url);
+        return $this->get($url, $filters);
     }
 }

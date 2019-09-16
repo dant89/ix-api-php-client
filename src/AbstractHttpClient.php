@@ -46,11 +46,14 @@ abstract class AbstractHttpClient implements HttpClientInterface
 
     /**
      * @param string $url
+     * @param array $filters
      * @return Response
      */
-    public function get(string $url): Response
+    public function get(string $url, array $filters = []): Response
     {
-        return $this->generateHttpResponse('GET', $url);
+        return $this->generateHttpResponse('GET', $url, [
+            'query' => $filters
+        ]);
     }
 
     /**
