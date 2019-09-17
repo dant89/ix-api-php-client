@@ -3,7 +3,7 @@
 [![Latest Stable Version][packagist-image]][packagist-url]
 [![Github Issues][github-issues-image]][github-issues-url]
 
-PHP API client for the [IX-API](https://ix-api.net).
+A lightweight PHP API client for the [IX-API](https://ix-api.net).
 
 ## Installation
 
@@ -16,40 +16,45 @@ To install, run `composer require dant89/ixapi-client` in the root of your proje
 
 ## Usage
 
-The following is a simple example of how you could use this client to get a list of products from an implementor of the API.
+Use your provided key / secret credentials for the given implementor URL to return and then set a bearer token:
 
 ```php
 <?php
-
-require('vendor/autoload.php');
 
 use Dant89\IXAPIClient\Client;
 
 // Create base client
 $client = new Client(IXAPI_URL);
 
-// Declare authentication variables
-$key = IXAPI_KEY;
-$secret = IXAPI_SECRET;
-
 // Get a bearer token from key / secret
-$authClient = $client->getHttpClient('auth');
-$authResponse = $authClient->postAuthToken($key, $secret);
-$authContent = $authResponse->getContent();
+$response = $client->getHttpClient('auth')
+    ->postAuthToken(IXAPI_KEY, IXAPI_SECRET);
 
-// Authenticate
-$client->setBearerToken($authContent['access_token']);
-
-// Get a list of products
-$productsClient = $client->getHttpClient('products');
-$productsResponse = $productsClient->getProducts();
-$products = $productsResponse->getContent();
-
-foreach ($products as $product) {
-    echo $product['name'] . "\n";
+// Check for valid response status
+if ($response->getStatus() === 200) {
+    $data = $response->getContent();
+    $client->setBearerToken($data['access_token']);
 }
-
 ```
+
+With the bearer token set, you can return data from all endpoints that require authentication, such as the products endpoints:
+```php
+<?php
+
+use Dant89\IXAPIClient\Client;
+
+// Create base client
+$client = new Client(IXAPI_URL);
+
+// Query for products
+$response = $client->getHttpClient('products')
+    ->getProducts();
+
+// Check for valid response and set the array of products
+if ($response->getStatus() === 200) {
+    $products = $response->getContent();
+}
+````
 
 ## Authentication
 
