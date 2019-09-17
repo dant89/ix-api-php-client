@@ -41,11 +41,6 @@ With the bearer token set, you can return data from all endpoints that require a
 ```php
 <?php
 
-use Dant89\IXAPIClient\Client;
-
-// Create base client
-$client = new Client(IXAPI_URL);
-
 // Query for products
 $response = $client->getHttpClient('products')
     ->getProducts();
