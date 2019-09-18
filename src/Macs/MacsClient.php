@@ -11,6 +11,18 @@ use Dant89\IXAPIClient\Response;
  */
 class MacsClient extends AbstractHttpClient
 {
+    const URL = '/macs';
+
+    /**
+     * @param string $id
+     * @return Response
+     */
+    public function deleteMac(string $id): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->delete($url);
+    }
+
     /**
      * @param string|null $id
      * @param array $filters
@@ -18,11 +30,20 @@ class MacsClient extends AbstractHttpClient
      */
     public function getMacs(string $id = null, array $filters = []): Response
     {
-        $url = '/macs';
+        $uri = self::URL;
         if (!is_null($id)) {
-            $url .= '/' . $id;
+            $uri .= '/' . $id;
         }
 
-        return $this->get($url, $filters);
+        return $this->get($uri, $filters);
+    }
+
+    /**
+     * @param array $data
+     * @return Response
+     */
+    public function postMac(array $data): Response
+    {
+        return $this->post(self::URL, $data);
     }
 }

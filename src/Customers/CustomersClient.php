@@ -11,6 +11,8 @@ use Dant89\IXAPIClient\Response;
  */
 class CustomersClient extends AbstractHttpClient
 {
+    const URL = '/customers';
+
     /**
      * @param string|null $id
      * @param array $filters
@@ -18,11 +20,42 @@ class CustomersClient extends AbstractHttpClient
      */
     public function getCustomers(string $id = null, array $filters = []): Response
     {
-        $url = '/customers';
+        $uri = self::URL;
         if (!is_null($id)) {
-            $url .= '/' . $id;
+            $uri .= '/' . $id;
         }
 
-        return $this->get($url, $filters);
+        return $this->get($uri, $filters);
+    }
+
+    /**
+     * @param string $id
+     * @param array $data
+     * @return Response
+     */
+    public function patchCustomer(string $id, array $data): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->patch($url, $data);
+    }
+
+    /**
+     * @param array $data
+     * @return Response
+     */
+    public function postCustomer(array $data): Response
+    {
+        return $this->post(self::URL, $data);
+    }
+
+    /**
+     * @param string $id
+     * @param array $data
+     * @return Response
+     */
+    public function putCustomer(string $id, array $data): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->put($url, $data);
     }
 }
