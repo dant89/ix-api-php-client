@@ -11,6 +11,8 @@ use Dant89\IXAPIClient\Response;
  */
 class IpsClient extends AbstractHttpClient
 {
+    const URL = '/ips';
+
     /**
      * @param string|null $id
      * @param array $filters
@@ -18,11 +20,33 @@ class IpsClient extends AbstractHttpClient
      */
     public function getIps(string $id = null, array $filters = []): Response
     {
-        $url = '/ips';
+        $uri = self::URL;
         if (!is_null($id)) {
-            $url .= '/' . $id;
+            $uri .= '/' . $id;
         }
 
-        return $this->get($url, $filters);
+        return $this->get($uri, $filters);
+    }
+
+    /**
+     * @param string $id
+     * @param array $data
+     * @return Response
+     */
+    public function patchIp(string $id, array $data): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->put($url, $data);
+    }
+
+    /**
+     * @param string $id
+     * @param array $data
+     * @return Response
+     */
+    public function putIp(string $id, array $data): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->patch($url, $data);
     }
 }
