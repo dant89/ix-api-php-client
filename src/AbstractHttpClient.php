@@ -32,7 +32,11 @@ abstract class AbstractHttpClient implements HttpClientInterface
     public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->httpClient = HttpClient::create();
+        $this->httpClient = HttpClient::create([
+            'headers' => [
+                'User-Agent' => 'IX-API-PHP-CLIENT/0.0.4',
+            ]
+        ]);
     }
 
     /**
@@ -121,18 +125,14 @@ abstract class AbstractHttpClient implements HttpClientInterface
         try {
             $httpResponse = $this->httpClient->request($method, $absoluteUrl, $options);
             $response->setStatus($httpResponse->getStatusCode());
-            $response->setHeaders($httpResponse->getHeaders());
-            $response->setContent($httpResponse->toArray());
+            $response->setHeaders($httpResponse->getHeaders(false));
+            $response->setContent($httpResponse->toArray(false));
         } catch (DecodingExceptionInterface |
             RedirectionExceptionInterface |
             ClientExceptionInterface |
-            ServerExceptionInterface $e
+            ServerExceptionInterface |
+            TransportExceptionInterface $e
         ) {
-            $response->setContent([
-                'title' => 'Client Error',
-                'message' => $e->getMessage()
-            ]);
-        } catch (TransportExceptionInterface $e) {
             $response->setStatus(500);
             $response->setContent([
                 'title' => 'Client Error',
