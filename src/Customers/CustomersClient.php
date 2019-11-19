@@ -61,7 +61,6 @@ class CustomersClient extends AbstractHttpClient
 
     /**
      * @param string $id
-     * @param array $data
      * @return Response
      */
     public function deleteCustomer(string $id): Response
