@@ -45,7 +45,7 @@ abstract class AbstractHttpClient implements HttpClientInterface
      */
     public function delete(string $url): Response
     {
-        return $this->generateHttpResponse('GET', $url);
+        return $this->generateHttpResponse('DELETE', $url);
     }
 
     /**
