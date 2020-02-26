@@ -23,7 +23,7 @@
     },
     "require": {
         "php": "^7.1",
-        "ext-json": "^1.5",
+        "ext-json": "^1.5 || ^7.4",
         "symfony/http-client": "^4.3"
     },
     "require-dev": {
