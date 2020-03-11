@@ -68,4 +68,14 @@ class CustomersClient extends AbstractHttpClient
         $url = self::URL . '/' . $id;
         return $this->put($url, $data);
     }
+
+    /**
+     * @param string $id
+     * @return Response
+     */
+    public function deleteCustomer(string $id): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->delete($url);
+    }
 }
