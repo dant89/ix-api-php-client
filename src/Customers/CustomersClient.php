@@ -14,6 +14,16 @@ class CustomersClient extends AbstractHttpClient
     const URL = '/customers';
 
     /**
+     * @param string $id
+     * @return Response
+     */
+    public function deleteCustomer(string $id): Response
+    {
+        $url = self::URL . '/' . $id;
+        return $this->delete($url);
+    }
+
+    /**
      * @param string|null $id
      * @param array $filters
      * @return Response
