@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e81920cb4b1d7c09739cbc23db8e0ae4",
+    "content-hash": "24f06df892cbbf0d4def100464f1c6dc",
     "packages": [
         {
             "name": "psr/log",
@@ -2162,7 +2162,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1",
-        "ext-json": "^1.5"
+        "ext-json": "*"
     },
     "platform-dev": []
 }
