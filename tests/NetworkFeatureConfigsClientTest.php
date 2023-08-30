@@ -2,12 +2,10 @@
 
 namespace Tests;
 
+use Dant89\IXAPIClient\HttpClientType;
+use Dant89\IXAPIClient\NetworkFeatureConfigs\NetworkFeatureConfigsClient;
 use Tests\Helper\ClientTestCase;
 
-/**
- * Class NetworkFeatureConfigsClientTest
- * @package Tests
- */
 class NetworkFeatureConfigsClientTest extends ClientTestCase
 {
     public function setUp(): void
@@ -16,10 +14,13 @@ class NetworkFeatureConfigsClientTest extends ClientTestCase
         $this->setBearerToken();
     }
 
+    /**
+     * @covers NetworkFeatureConfigsClient::get
+     */
     public function testGetNetworkFeatureConfigs()
     {
-        $client = $this->client->getHttpClient('network-feature-configs');
-        $response = $client->getNetworkFeatureConfigs();
+        $client = $this->client->getHttpClient(HttpClientType::NETWORK_FEATURE_CONFIGS);
+        $response = $client->get();
 
         $this->assertEquals(200, $response->getStatus());
     }

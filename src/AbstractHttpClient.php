@@ -2,116 +2,64 @@
 
 namespace Dant89\IXAPIClient;
 
-use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\CurlHttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-/**
- * Class AbstractHttpClient
- * @package Dant89\IXAPIClient
- */
 abstract class AbstractHttpClient implements HttpClientInterface
 {
-    /**
-     * @var Client
-     */
-    private $client;
+    private Client $client;
+    private CurlHttpClient $httpClient;
+    protected const URL = null;
 
-    /**
-     * @var HttpClient
-     */
-    private $httpClient;
-
-    /**
-     * AbstractHttpClient constructor.
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->httpClient = HttpClient::create([
+        $this->httpClient = new CurlHttpClient([
             'headers' => [
-                'User-Agent' => 'IX-API-PHP-CLIENT/0.0.4',
+                'User-Agent' => 'IX-API-PHP-CLIENT/2.0.0',
             ]
         ]);
     }
 
-    /**
-     * @param string $url
-     * @return Response
-     */
-    public function delete(string $url): Response
+    public function delete(string $id, ?string $extendUri = null): Response
     {
-        return $this->generateHttpResponse('DELETE', $url);
+        $uri = $this::URL . '/' . $id . ($extendUri ?? '');
+        return $this->generateHttpResponse('DELETE', $uri);
     }
 
-    /**
-     * @param string $url
-     * @param array $filters
-     * @return Response
-     */
-    public function get(string $url, array $filters = []): Response
+    public function get(?string $id = null, ?array $filters = [], ?string $extendUri = null): Response
     {
-        return $this->generateHttpResponse('GET', $url, [
+        $uri = $this::URL . (!is_null($id) ? '/' . $id : '') . ($extendUri ?? '');
+        return $this->generateHttpResponse('GET', $uri, [
             'query' => $filters
         ]);
     }
 
-    /**
-     * @param string $url
-     * @param array $data
-     * @return Response
-     */
-    public function patch(string $url, array $data): Response
+    public function patch(string $id, array $data): Response
     {
-        return $this->generateHttpResponse('PATCH', $url, [
+        return $this->generateHttpResponse('PATCH', $this::URL . '/' . $id, [
             'json' => $data
         ]);
     }
 
-    /**
-     * @param string $url
-     * @param array $data
-     * @return Response
-     */
-    public function post(string $url, array $data): Response
+    public function post(array $data, ?string $extendUri = null): Response
     {
-        return $this->generateHttpResponse('POST', $url, [
+        $uri = $this::URL . ($extendUri ?? '');
+        return $this->generateHttpResponse('POST', $uri, [
             'json' => $data
         ]);
     }
 
-    /**
-     * @param string $url
-     * @param array $data
-     * @return Response
-     */
-    public function put(string $url, array $data): Response
-    {
-        return $this->generateHttpResponse('PUT', $url, [
-            'json' => $data
-        ]);
-    }
-
-    /**
-     * @param string $url
-     * @return string
-     */
     private function getFullUrl(string $url): string
     {
         $baseUrl = rtrim($this->client->getBaseUrl(), '/') . '/';
         return $baseUrl . 'api/' . $this->client->getApiVersion() . $url;
     }
 
-    /**
-     * @param string $method
-     * @param string $url
-     * @param array $options
-     * @return Response
-     */
     private function generateHttpResponse(string $method, string $url, array $options = []): Response
     {
         $response = new Response();

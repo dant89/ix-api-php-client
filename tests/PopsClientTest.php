@@ -2,12 +2,10 @@
 
 namespace Tests;
 
+use Dant89\IXAPIClient\HttpClientType;
+use Dant89\IXAPIClient\Pops\PopsClient;
 use Tests\Helper\ClientTestCase;
 
-/**
- * Class PopsClientTest
- * @package Tests
- */
 class PopsClientTest extends ClientTestCase
 {
     public function setUp(): void
@@ -16,10 +14,13 @@ class PopsClientTest extends ClientTestCase
         $this->setBearerToken();
     }
 
+    /**
+     * @covers PopsClient::get
+     */
     public function testGetPops()
     {
-        $client = $this->client->getHttpClient('pops');
-        $response = $client->getPops();
+        $client = $this->client->getHttpClient(HttpClientType::POPS);
+        $response = $client->get();
 
         $this->assertEquals(200, $response->getStatus());
     }

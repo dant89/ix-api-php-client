@@ -2,12 +2,10 @@
 
 namespace Tests;
 
+use Dant89\IXAPIClient\HttpClientType;
+use Dant89\IXAPIClient\NetworkServiceConfigs\NetworkServiceConfigsClient;
 use Tests\Helper\ClientTestCase;
 
-/**
- * Class NetworkServiceConfigsClientTest
- * @package Tests
- */
 class NetworkServiceConfigsClientTest extends ClientTestCase
 {
     public function setUp(): void
@@ -16,10 +14,13 @@ class NetworkServiceConfigsClientTest extends ClientTestCase
         $this->setBearerToken();
     }
 
+    /**
+     * @covers NetworkServiceConfigsClient::get
+     */
     public function testGetNetworkServiceConfigs()
     {
-        $client = $this->client->getHttpClient('network-service-configs');
-        $response = $client->getNetworkServiceConfigs();
+        $client = $this->client->getHttpClient(HttpClientType::NETWORK_SERVICE_CONFIGS);
+        $response = $client->get();
 
         $this->assertEquals(200, $response->getStatus());
     }

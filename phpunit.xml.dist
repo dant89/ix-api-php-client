@@ -19,4 +19,10 @@
             <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
+
+    <php>
+        <env name="API_KEY" value="your_api_key_here"/>
+        <env name="API_SECRET" value="your_secret_here"/>
+        <env name="API_URL" value="your_url_here"/>
+    </php>
 </phpunit>

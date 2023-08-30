@@ -2,12 +2,10 @@
 
 namespace Tests;
 
+use Dant89\IXAPIClient\Connections\ConnectionsClient;
+use Dant89\IXAPIClient\HttpClientType;
 use Tests\Helper\ClientTestCase;
 
-/**
- * Class ConnectionsClientTest
- * @package Tests
- */
 class ConnectionsClientTest extends ClientTestCase
 {
     public function setUp(): void
@@ -16,10 +14,13 @@ class ConnectionsClientTest extends ClientTestCase
         $this->setBearerToken();
     }
 
+    /**
+     * @covers ConnectionsClient::get
+     */
     public function testGetConnections()
     {
-        $client = $this->client->getHttpClient('connections');
-        $response = $client->getConnections();
+        $client = $this->client->getHttpClient(HttpClientType::CONNECTIONS);
+        $response = $client->get();
 
         $this->assertEquals(200, $response->getStatus());
     }
