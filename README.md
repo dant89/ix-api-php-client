@@ -7,7 +7,7 @@ An unofficial lightweight PHP API client for the [IX-API](https://ix-api.net).
 
 ## Installation
 
-To install, run `composer require dant89/ixapi-client` in the root of your project or add `dant89/ix-api-client` to your composer.json.
+To install, run `composer require dant89/ix-api-client` in the root of your project or add `dant89/ix-api-client` to your composer.json.
 ```json
 "require": {
     "dant89/ix-api-client": "^LATEST_VERSION_TAG"
