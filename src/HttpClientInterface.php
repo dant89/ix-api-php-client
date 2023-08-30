@@ -4,36 +4,8 @@ namespace Dant89\IXAPIClient;
 
 interface HttpClientInterface
 {
-    /**
-     * @param string $uri
-     * @return $this
-     */
-    public function delete(string $uri);
-
-    /**
-     * @param string $uri
-     * @return $this
-     */
-    public function get(string $uri);
-
-    /**
-     * @param string $uri
-     * @param array $data
-     * @return $this
-     */
-    public function patch(string $uri, array $data);
-
-    /**
-     * @param string $uri
-     * @param array $data
-     * @return $this
-     */
-    public function post(string $uri, array $data);
-
-    /**
-     * @param string $uri
-     * @param array $data
-     * @return $this
-     */
-    public function put(string $uri, array $data);
+    public function delete(string $id): Response;
+    public function get(?string $id, ?array $filters = []): Response;
+    public function patch(string $id, array $data): Response;
+    public function post(array $data): Response;
 }

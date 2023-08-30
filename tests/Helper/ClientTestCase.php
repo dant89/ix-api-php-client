@@ -3,43 +3,28 @@
 namespace Tests\Helper;
 
 use Dant89\IXAPIClient\Client;
+use Dant89\IXAPIClient\HttpClientType;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ClientTestCase
- * @package Tests\Helper
- */
 class ClientTestCase extends TestCase
 {
-    /**
-     * @var string
-     */
-    protected $key = '';
-
-    /**
-     * @var string
-     */
-    protected $secret = '';
-
-    /**
-     * @var string
-     */
-    protected $url = '';
-
-    /**
-     * @var Client
-     */
-    protected $client;
+    protected string $key;
+    protected string $secret;
+    protected string $url;
+    protected Client $client;
 
     public function setUp(): void
     {
         parent::setUp();
+        $this->key = getenv('API_KEY');
+        $this->secret = getenv('API_SECRET');
+        $this->url = getenv('API_URL');
         $this->client = new Client($this->url);
     }
 
-    public function setBearerToken()
+    public function setBearerToken(): void
     {
-        $authClient = $this->client->getHttpClient('auth');
+        $authClient = $this->client->getHttpClient(HttpClientType::AUTH);
         $response = $authClient->postAuthToken($this->key, $this->secret);
         $responseData = $response->getContent();
         $this->client->setBearerToken($responseData['access_token']);

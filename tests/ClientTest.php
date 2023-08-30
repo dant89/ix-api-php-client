@@ -2,12 +2,9 @@
 
 namespace Tests;
 
+use Dant89\IXAPIClient\Client;
 use Tests\Helper\ClientTestCase;
 
-/**
- * Class ClientTest
- * @package Tests
- */
 class ClientTest extends ClientTestCase
 {
     public function setUp(): void
@@ -15,6 +12,9 @@ class ClientTest extends ClientTestCase
         parent::setUp();
     }
 
+    /**
+     * @covers Client::getBaseUrl
+     */
     public function testClient()
     {
         $this->assertEquals($this->client->getBaseUrl(), $this->url);
