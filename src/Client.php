@@ -34,7 +34,7 @@ class Client
         return $this;
     }
 
-    public function getHttpClient(HttpClientType $clientType) {
+    public function getHttpClient(HttpClientType $clientType): AbstractHttpClient {
         return new $clientType->value($this);
     }
 }
