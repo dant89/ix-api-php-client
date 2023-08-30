@@ -4,7 +4,7 @@ namespace Dant89\IXAPIClient;
 
 class Client
 {
-    const API_VERSION = 'v2';
+    private const API_VERSION = 'v2';
     private string $baseUrl;
     private ?string $bearerToken = null;
 
@@ -34,7 +34,8 @@ class Client
         return $this;
     }
 
-    public function getHttpClient(HttpClientType $clientType): AbstractHttpClient {
+    public function getHttpClient(HttpClientType $clientType): AbstractHttpClient
+    {
         return new $clientType->value($this);
     }
 }

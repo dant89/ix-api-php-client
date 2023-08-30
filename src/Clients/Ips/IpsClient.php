@@ -6,5 +6,5 @@ use Dant89\IXAPIClient\AbstractHttpClient;
 
 class IpsClient extends AbstractHttpClient
 {
-    const URL = '/ips';
+    protected const URL = '/ips';
 }

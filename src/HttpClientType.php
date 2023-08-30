@@ -29,7 +29,8 @@ use Dant89\IXAPIClient\Clients\ProductOfferings\ProductOfferingsClient;
 use Dant89\IXAPIClient\Clients\RoleAssignments\RoleAssignmentsClient;
 use Dant89\IXAPIClient\Clients\Roles\RolesClient;
 
-enum HttpClientType: string {
+enum HttpClientType: string
+{
     case AUTH = AuthClient::class;
     case ACCOUNT = AccountClient::class;
     case ACCOUNTS = AccountsClient::class;

@@ -75,7 +75,8 @@ abstract class AbstractHttpClient implements HttpClientInterface
             $response->setStatus($httpResponse->getStatusCode());
             $response->setHeaders($httpResponse->getHeaders(false));
             $response->setContent($httpResponse->toArray(false));
-        } catch (DecodingExceptionInterface |
+        } catch (
+            DecodingExceptionInterface |
             RedirectionExceptionInterface |
             ClientExceptionInterface |
             ServerExceptionInterface |
