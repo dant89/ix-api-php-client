@@ -42,24 +42,50 @@ With the bearer token set, you can return data from all endpoints that require a
 ```php
 // Query for products
 $response = $client->getHttpClient(HttpClientType::PRODUCT_OFFERINGS)
-    ->getProductOfferingss();
+    ->get();
 
 // Check for valid response and set the array of products
 if ($response->getStatus() === 200) {
     $productOfferings = $response->getContent();
 }
 ````
-**Get Connections Statistical Timeseries Data:**
-```php
-// Query for connections timeseries data
-$response = $client->getHttpClient(HttpClientType::CONNECTIONS)
-    ->getStatisticTimeseries('connection-123-uuid', '30d');
 
-// Check for valid response and set the array of products
-if ($response->getStatus() === 200) {
-    $timeseries = $response->getContent();
-}
+**Method Support and Filters:**
+
+All base clients have support for `get`, `delete`, `post`, `patch`.
+
+Additional methods are available where supported, for example `getStatistics`, `getLoa`.
+
+```php
+$singleItem = $client->getHttpClient(HttpClientType::CONTACTS)
+    ->get('item-uuid')
+    ->getContent();
+    
+$filteredItems = $client->getHttpClient(HttpClientType::CONTACTS)
+    ->get(null, ['managing_account' => 'uuid-123'])
+    ->getContent();
+
+$response = $client->getHttpClient(HttpClientType::CONTACTS)
+    ->post([
+        'managing_account' => 'uuid-123',
+        'consuming_account' => 'uuid-456',
+        'name' => 'sample contact',
+    ]);
+    
+$client->getHttpClient(HttpClientType::CONTACTS)
+    ->patch('item-uuid', [
+        'name' => 'renamed sample contact',
+    ]);
+    
+$client->getHttpClient(HttpClientType::CONTACTS)
+    ->delete('item-uuid');
+
+// Query for connections timeseries data
+$timeseries = $client->getHttpClient(HttpClientType::CONNECTIONS)
+    ->getStatisticTimeseries('connection-123-uuid', '30d')
+    ->getContent();
 ````
+
 
 ## Authentication
 
